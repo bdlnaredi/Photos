@@ -6,11 +6,11 @@ final Map<ImmichColorPreset, ImmichTheme> _themePresets = {
   ImmichColorPreset.indigo: ImmichTheme(
     light: ColorScheme.fromSeed(
       seedColor: immichBrandColorLight,
-    ).copyWith(primary: immichBrandColorLight, onSurface: const Color.fromARGB(255, 34, 31, 32)),
+    ).copyWith(primary: immichBrandColorLight, onSurface: const Color(0xFF1F1F1F), surface: Colors.white),
     dark: ColorScheme.fromSeed(
       seedColor: immichBrandColorDark,
       brightness: Brightness.dark,
-    ).copyWith(primary: immichBrandColorDark),
+    ).copyWith(primary: immichBrandColorDark, surface: const Color(0xFF131314), onSurface: const Color(0xFFE3E3E3)),
   ),
   ImmichColorPreset.deepPurple: ImmichTheme(
     light: ColorScheme.fromSeed(seedColor: const Color(0xFF6F43C0)),
