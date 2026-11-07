@@ -111,6 +111,10 @@ export const Route = {
   // sharing
   sharing: () => '/sharing',
 
+  // feed
+  feed: () => '/feed',
+  viewFeed: ({ id }: { id: string }) => `/feed/${id}`,
+
   // shared links
   sharedLinks: (params?: { filter?: SharedLinkTab }) => '/shared-links' + asQueryString(params),
   editSharedLink: ({ id }: { id: string }) => `/shared-links/${id}/edit`,

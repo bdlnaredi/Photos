@@ -28,6 +28,8 @@
     mdiMagnify,
     mdiMap,
     mdiMapOutline,
+    mdiMessageText,
+    mdiMessageTextOutline,
     mdiTagMultipleOutline,
     mdiToolbox,
     mdiToolboxOutline,
@@ -68,6 +70,8 @@
     icon={mdiAccountMultipleOutline}
     activeIcon={mdiAccountMultiple}
   />
+
+  <NavbarItem title={$t('feed')} href={Route.feed()} icon={mdiMessageTextOutline} activeIcon={mdiMessageText} />
 
   <NavbarGroup title={$t('library')} size="tiny" />
 

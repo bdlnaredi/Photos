@@ -12,6 +12,41 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  web-check:
+    name: Web check
+    if: ${{ github.repository_owner != 'immich-app' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: ./web
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: immich-app/devtools/actions/use-mise@06a9ef925332c91be647d6256642b86b398592c8 # use-mise-action-v3.2.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build SDK
+        run: mise run //:sdk:install && mise run //:sdk:build
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Svelte and TypeScript check
+        run: pnpm run check:svelte && pnpm run check:typescript
+
+      - name: Lint
+        if: ${{ !cancelled() }}
+        run: pnpm lint
+
+      - name: Format
+        if: ${{ !cancelled() }}
+        run: pnpm run format
+
   server:
     name: Server image
     if: ${{ github.repository_owner != 'immich-app' }}
