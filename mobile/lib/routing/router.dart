@@ -36,6 +36,8 @@ import 'package:immich_mobile/pages/search/map/map_location_picker.page.dart';
 import 'package:immich_mobile/pages/settings/sync_status.page.dart';
 import 'package:immich_mobile/pages/share_intent/share_intent.page.dart';
 import 'package:immich_mobile/presentation/pages/activities.page.dart';
+import 'package:immich_mobile/presentation/pages/feed.page.dart';
+import 'package:immich_mobile/presentation/pages/feed_chat.page.dart';
 import 'package:immich_mobile/presentation/pages/album.page.dart';
 import 'package:immich_mobile/presentation/pages/album_options.page.dart';
 import 'package:immich_mobile/presentation/pages/archive.page.dart';
@@ -126,6 +128,7 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: SearchRoute.page, guards: [_authGuard, _duplicateGuard], maintainState: false),
         AutoRoute(page: LibraryRoute.page, guards: [_authGuard, _duplicateGuard]),
         AutoRoute(page: AlbumsRoute.page, guards: [_authGuard, _duplicateGuard]),
+        AutoRoute(page: FeedRoute.page, guards: [_authGuard, _duplicateGuard]),
       ],
     ),
     AutoRoute(page: ProfilePictureCropRoute.page),
@@ -187,6 +190,7 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: MapRoute.page, guards: [_authGuard, _duplicateGuard]),
     AutoRoute(page: EditImageRoute.page),
     AutoRoute(page: ActivitiesRoute.page, guards: [_authGuard, _duplicateGuard]),
+    AutoRoute(page: FeedChatRoute.page, guards: [_authGuard, _duplicateGuard]),
     AutoRoute(page: BackupAssetDetailRoute.page, guards: [_authGuard, _duplicateGuard]),
     AutoRoute(page: AssetTroubleshootRoute.page, guards: [_authGuard, _duplicateGuard]),
     AutoRoute(page: DownloadInfoRoute.page, guards: [_authGuard, _duplicateGuard]),

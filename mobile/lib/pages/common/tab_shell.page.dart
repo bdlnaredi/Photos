@@ -50,6 +50,12 @@ class _TabShellPageState extends ConsumerState<TabShellPage> {
         enabled: !isReadonlyModeEnabled,
       ),
       NavigationDestination(
+        label: context.t.feed,
+        icon: const Icon(Icons.chat_bubble_outline_rounded),
+        selectedIcon: Icon(Icons.chat_bubble_rounded, color: context.primaryColor),
+        enabled: !isReadonlyModeEnabled,
+      ),
+      NavigationDestination(
         label: context.t.library$,
         icon: const Icon(Icons.space_dashboard_outlined),
         selectedIcon: Icon(Icons.space_dashboard_rounded, color: context.primaryColor),
@@ -77,7 +83,7 @@ class _TabShellPageState extends ConsumerState<TabShellPage> {
     }
 
     return AutoTabsRouter(
-      routes: const [MainTimelineRoute(), SearchRoute(), AlbumsRoute(), LibraryRoute()],
+      routes: const [MainTimelineRoute(), SearchRoute(), AlbumsRoute(), FeedRoute(), LibraryRoute()],
       duration: const Duration(milliseconds: 600),
       transitionBuilder: (context, child, animation) => FadeTransition(opacity: animation, child: child),
       builder: (context, child) {
