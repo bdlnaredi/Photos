@@ -66,7 +66,10 @@
   const usersById = $derived(new Map(users.map((user) => [user.id, user])));
   const nameColors = ['text-sky-700', 'text-emerald-700', 'text-rose-700', 'text-amber-700', 'text-violet-700'];
   const nameColorFor = (userId: string) => {
-    const index = Math.max(0, users.findIndex((user) => user.id === userId));
+    const index = Math.max(
+      0,
+      users.findIndex((user) => user.id === userId),
+    );
     return nameColors[index % nameColors.length];
   };
 
