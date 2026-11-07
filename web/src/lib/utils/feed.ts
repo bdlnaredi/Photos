@@ -149,11 +149,16 @@ export const loadFeedChats = async (): Promise<FeedChat[]> => {
   const chats = await Promise.all(
     albums.map(async (album) => {
       const activities = album.isActivityEnabled ? await getActivities({ albumId: album.id }).catch(() => []) : [];
-      const lastActivity = activities.filter((activity) => activity.type === ReactionType.Comment).at(-1);
+      const lastActivity = activities.findLast((activity) => activity.type === ReactionType.Comment);
       const candidates = [album.lastModifiedAssetTimestamp, lastActivity?.createdAt, album.updatedAt].filter(
         (value): value is string => !!value,
       );
-      const lastAt = candidates.reduce((latest, value) => (time(value) > time(latest) ? value : latest));
+      let lastAt = album.updatedAt;
+      for (const value of candidates) {
+        if (time(value) > time(lastAt)) {
+          lastAt = value;
+        }
+      }
       return { album, lastActivity, lastAt };
     }),
   );

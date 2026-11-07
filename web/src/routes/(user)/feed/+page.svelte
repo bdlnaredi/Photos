@@ -32,9 +32,7 @@
   };
 
   const membersFor = (chat: PageData['chats'][number]) =>
-    chat.album.albumUsers
-      .map(({ user }) => (user.id === authManager.user.id ? $t('you') : user.name))
-      .join(', ');
+    chat.album.albumUsers.map(({ user }) => (user.id === authManager.user.id ? $t('you') : user.name)).join(', ');
 </script>
 
 <UserPageLayout title={data.meta.title} actions={[CreateAlbum]}>
@@ -46,7 +44,7 @@
         <li>
           <a
             href={Route.viewFeed({ id: chat.album.id })}
-            class="flex items-center gap-4 rounded-2xl px-3 py-3 transition-colors hover:bg-light-100"
+            class="flex items-center gap-4 rounded-2xl p-3 transition-colors hover:bg-light-100"
           >
             <div class="relative size-14 shrink-0 overflow-hidden rounded-full bg-light-200">
               {#if chat.album.albumThumbnailAssetId}

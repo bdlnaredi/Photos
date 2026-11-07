@@ -66,8 +66,8 @@
   const usersById = $derived(new Map(users.map((user) => [user.id, user])));
   const nameColors = ['text-sky-700', 'text-emerald-700', 'text-rose-700', 'text-amber-700', 'text-violet-700'];
   const nameColorFor = (userId: string) => {
-    const index = users.findIndex((user) => user.id === userId);
-    return nameColors[(index < 0 ? 0 : index) % nameColors.length];
+    const index = Math.max(0, users.findIndex((user) => user.id === userId));
+    return nameColors[index % nameColors.length];
   };
 
   const isNearBottom = () => {
@@ -162,8 +162,7 @@
 
   const tileGrid = (count: number) => (count === 1 ? 'grid-cols-1' : 'grid-cols-2');
 
-  const ownerName = (group: FeedPhotoGroup) =>
-    group.owner?.name ?? usersById.get(group.ownerId)?.name ?? $t('unknown');
+  const ownerName = (group: FeedPhotoGroup) => group.owner?.name ?? usersById.get(group.ownerId)?.name ?? $t('unknown');
 
   onMount(() => {
     void scrollToBottom();
@@ -197,7 +196,7 @@
 
     <div
       bind:this={scroller}
-      class="immich-scrollbar flex-1 overflow-y-auto bg-light-50 px-2 py-4 sm:px-6"
+      class="flex-1 immich-scrollbar overflow-y-auto bg-light-50 px-2 py-4 sm:px-6"
       data-testid="feed-messages"
     >
       {#if items.length === 0}
@@ -317,11 +316,11 @@
                     href={Route.viewAlbumAsset({ albumId: album.id, assetId: item.replyTo.id })}
                     class="my-1 flex items-center gap-2 rounded-lg border-s-4 border-primary bg-black/5 p-1 dark:bg-white/5"
                   >
-                    <img src={thumbnail(item.replyTo)} alt="" class="size-10 rounded object-cover" loading="lazy" />
+                    <img src={thumbnail(item.replyTo)} alt="" class="size-10 rounded-sm object-cover" loading="lazy" />
                     <span class="text-xs text-light-600">{$t('feed_replied_to_photo')}</span>
                   </a>
                 {/if}
-                <p class="text-sm break-words whitespace-pre-wrap text-dark">{item.activity.comment}</p>
+                <p class="text-sm wrap-break-word whitespace-pre-wrap text-dark">{item.activity.comment}</p>
                 <p class="mt-0.5 text-end text-[11px] text-light-600">{formatFeedTime(item.createdAt, $locale)}</p>
               </div>
               {#if mine || isOwner}
@@ -348,7 +347,7 @@
         <div class="mx-auto max-w-3xl">
           {#if replyTo}
             <div class="mb-2 flex items-center gap-2 rounded-xl border-s-4 border-primary bg-light-100 p-2">
-              <img src={thumbnail(replyTo)} alt="" class="size-10 rounded object-cover" />
+              <img src={thumbnail(replyTo)} alt="" class="size-10 rounded-sm object-cover" />
               <p class="flex-1 text-xs text-light-600">{$t('feed_replying_to_photo')}</p>
               <IconButton
                 shape="round"
