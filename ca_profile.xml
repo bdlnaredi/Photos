@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<CommunityApplications>
+  <Profile>
+Photos is a self-hosted Google Photos alternative built on Immich, maintained by bdlnaredi. It adds a WhatsApp-style family feed for shared albums, Google Photos styling and a complete Hindi translation.
+
+This repository ships four containers that work together: Photos (the app), Photos-Postgres (database), Photos-Redis (job queue) and Photos-ML (face recognition and smart search). Install the three helpers first, then Photos.
+
+Report problems on GitHub issues.
+  </Profile>
+  <Icon>https://raw.githubusercontent.com/bdlnaredi/photos/main/unraid/icon.png</Icon>
+  <WebPage>https://github.com/bdlnaredi/photos</WebPage>
+  <Forum>https://github.com/bdlnaredi/photos/issues</Forum>
+</CommunityApplications>
